@@ -1,2 +1,3 @@
-IIIT-CI
+# IIIT-CI
+
 The IIIT Club Index
