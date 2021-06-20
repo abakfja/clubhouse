@@ -15,11 +15,11 @@ RUN npm install
 # RUN npm ci --only=production
 
 RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN adduser -S nodejs -u 1001
 
 COPY --chown=nextjs:nodejs . .
 
-USER nextjs
+USER nodejs
 
 EXPOSE 8080
 
