@@ -1,3 +1,3 @@
-# IIIT-CI
+# clubhouse@iiit
 
-The IIIT Club Index
+Place to find all the activities of the clubs inside IIIT
