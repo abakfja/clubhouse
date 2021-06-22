@@ -1,5 +1,5 @@
 {
-  "name": "iiitci",
+  "name": "clubhouse",
   "version": "0.1.0",
   "description": "A platform to find and stay connected with club activities inside iiitH",
   "private": true,
@@ -18,7 +18,6 @@
   "devDependencies": {
     "eslint": "7.28.0",
     "eslint-config-next": "11.0.0",
-    "eslint-plugin-react": "^7.24.0",
     "prettier": "^2.3.1"
   }
 }
