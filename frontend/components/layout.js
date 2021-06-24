@@ -3,12 +3,13 @@ import Image from "next/image";
 import styles from "./Layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
+import Navbar from "./Navbar";
 
 export const siteTitle = "clubhouse";
 
 export default function Layout({ children }, home) {
 	return (
-		<div className={styles.container}>
+		<div>
 			<Head>
 				<link rel="icon" href="/favicon.ico" />
 				<meta
@@ -18,6 +19,8 @@ export default function Layout({ children }, home) {
 				<meta name="og:title" content={siteTitle} />
 				<meta name="twitter:card" content="summary_large_image" />
 			</Head>
+			<Navbar />
+
 			<header className={styles.header}>
 				{home ? (
 					<>

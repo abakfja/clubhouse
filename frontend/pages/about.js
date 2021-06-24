@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
-import utilStyles from "../styles/utils.module.css"
+import utilStyles from "../styles/utils.module.css";
 
 export default function About() {
 	return (
@@ -16,7 +16,7 @@ export default function About() {
 				</p>
 			</section>
 			<Link href="/">
-				<a>Back to Home</a>
+				<a className="text-right">Back to Home</a>
 			</Link>
 		</Layout>
 	);
