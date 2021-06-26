@@ -1,17 +1,22 @@
-import Image from "next/image";
+import Head from "next/head";
+import Layout, { siteTitle } from "../components/layout";
 import LeftContainer from "../components/left";
 import RightContainer from "../components/right";
-// import Link from "next/link";
 
-const Dashboard = () => {
+const pageTitle = "Dashboard | Clubhouse";
+
+export default function Dashboard() {
 	return (
-		<div className="container mx-auto max-w-7xl">
-			<div className=" flex flex-row p-8 items-start">
-				<LeftContainer />
-				{/* <RightContainer /> */}
+		<Layout>
+			<Head>
+				<title>{pageTitle}</title>
+			</Head>
+			<div className="container mx-auto max-w-6xl box-border">
+				<div className=" flex flex-row py-8 items-start">
+					<LeftContainer />
+					<RightContainer />
+				</div>
 			</div>
-		</div>
+		</Layout>
 	);
-};
-
-export default Dashboard;
+}
