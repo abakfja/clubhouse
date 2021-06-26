@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Dashboard from "../pages/dashboard";
 import Navbar from "./navbar";
 
 export const siteTitle = "clubhouse";
@@ -16,9 +17,8 @@ export default function Layout({ children }) {
 				<meta name="twitter:card" content="summary_large_image" />
 			</Head>
 			<Navbar />
-			<header>
-				<p className="text-4x1">Welcome to clubhouse!</p>
-			</header>
+			<Dashboard />
+
 			<main>{children}</main>
 		</div>
 	);

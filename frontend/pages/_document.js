@@ -11,28 +11,11 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					<link
-						rel="preconnect"
-						href="https://fonts.gstatic.com"
-						crossOrigin="true"
-					/>
-					<link
-						rel="preload"
-						as="style"
-						href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-					/>
-					<link
-						rel="stylesheet"
-						href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-						media="print"
-						onLoad="this.media='all'"
-					/>
-					<noscript>
-						<link
-							rel="stylesheet"
-							href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-						/>
-					</noscript>
+					<link rel="preload" as="font" href="/fonts/Inter-Light.ttf" />
+					<link rel="preload" as="font" href="/fonts/Inter-Regular.ttf" />
+					<link rel="preload" as="font" href="/fonts/Inter-SemiBold.ttf" />
+					<link rel="preload" as="font" href="/fonts/Inter-Bold.ttf" />
+					{/* <link rel="stylesheet" href="/fonts/Inter-Regular.ttf" /> */}
 				</Head>
 				<body>
 					<Main />
