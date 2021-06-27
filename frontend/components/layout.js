@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Dashboard from "../pages/dashboard";
 import Navbar from "./navbar";
 
 export const siteTitle = "clubhouse";
