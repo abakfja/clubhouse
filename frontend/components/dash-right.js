@@ -52,7 +52,6 @@ let eventData = [
 ];
 
 const MyDate = ({ date }) => {
-	console.log(date.getDay());
 	return (
 		<div className="flex flex-col flex-none w-18 m-2">
 			<div className="h-4 text-xs text-gray-500">{"MON"}</div>
@@ -102,7 +101,6 @@ const Card = ({ event }) => {
 };
 
 export default function RightContainer() {
-	console.log(eventData)
 	return (
 		<div className="w-2/3 text-center border mx-2 bg-white border-gray-300 rounded-md">
 			<div className="container px-2 py-4">
