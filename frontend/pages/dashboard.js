@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
-import LeftContainer from "../components/left";
-import RightContainer from "../components/right";
+import LeftContainer from "../components/dash-left";
+import RightContainer from "../components/dash-right";
 
 const pageTitle = "Dashboard | Clubhouse";
 
@@ -11,10 +11,12 @@ export default function Dashboard() {
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
-			<div className="container mx-auto max-w-6xl box-border">
-				<div className=" flex flex-row py-8 items-start">
-					<LeftContainer />
-					<RightContainer />
+			<div className="bg-gray-100">
+				<div className="container mx-auto max-w-6xl box-border">
+					<div className=" flex flex-row py-8 items-start">
+						<LeftContainer />
+						<RightContainer />
+					</div>
 				</div>
 			</div>
 		</Layout>

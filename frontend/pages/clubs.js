@@ -1,7 +1,8 @@
 import Layout from "../components/layout";
+import SearchBar from "../components/club-search";
 import Head from "next/head";
 
-const pageTitle = "Groups | Clubhouse";
+const pageTitle = "Clubs | Clubhouse";
 
 const Post = () => {
 	return (
@@ -9,7 +10,7 @@ const Post = () => {
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
-			<p>Groups page</p>
+			<SearchBar />
 		</Layout>
 	);
 };

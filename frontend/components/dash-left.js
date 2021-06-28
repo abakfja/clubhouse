@@ -75,8 +75,8 @@ const MyDisclosure = ({ items, title, open }) => {
 
 const LeftContainer = () => {
 	return (
-		<div className="w-1/3 justify-center">
-			<div className="flex flex-col mx-2 justify-center items-center space-y-6 py-6 border border-gray-300 rounded-md">
+		<div className="w-1/3 justify-center ">
+			<div className="flex flex-col mx-2 justify-center items-center space-y-6 py-6 border bg-white border-gray-300 rounded-md">
 				<div className="flex flex-col items-center">
 					<div className="bg-gray-800 m-4 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
 						<Image

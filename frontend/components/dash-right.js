@@ -65,7 +65,7 @@ const Activity = ({ date, events }) => {
 	return (
 		<div className="flex flex-row p-2 w-full justify-center items-start my-0">
 			<MyDate date={date} />
-			<div className="flex flex-col flex-grow">
+			<div className="flex flex-col flex-grow px-2">
 				{events.map((event, index) => (
 					<Card key={index} event={event} />
 				))}
@@ -77,13 +77,13 @@ const Activity = ({ date, events }) => {
 const Card = ({ event }) => {
 	return (
 		<div
-			className="flex w-full h-20 m-2 justify-between items-center rounded-lg 
+			className="flex h-20 p-1 my-1 justify-between items-center rounded-lg 
 			focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-purle-500
 			text-red-900 bg-red-100
 			shadow-md 
 		  "
 		>
-			<div className="text-left ml-4 p-1">
+			<div className="text-left ml-2 p-1">
 				<p className="text-lg overflow-hidden overflow-ellipsis">{event.name}</p>
 				<p className="text-xs overflow-hidden overflow-ellipsis whitespace-nowrap">{event.sub}</p>
 				<p className="text-sm">{event.time}</p>
@@ -93,7 +93,6 @@ const Card = ({ event }) => {
 					className="rounded-full"
 					src="/images/profile.jpg"
 					alt="profile"
-					// layout="intrinsic"
 					width={240}
 					height={240}
 				/>
@@ -105,7 +104,7 @@ const Card = ({ event }) => {
 export default function RightContainer() {
 	console.log(eventData)
 	return (
-		<div className="w-2/3 text-center border mx-2 border-gray-300 rounded-md">
+		<div className="w-2/3 text-center border mx-2 bg-white border-gray-300 rounded-md">
 			<div className="container px-2 py-4">
 				{eventData.map((d) => (
 					<Activity date={d.date} events={d.events} key={d.id} />
