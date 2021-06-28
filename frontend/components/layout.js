@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Navbar from "./navbar";
 
-export const siteTitle = "clubhouse";
+export const siteTitle = "Clubhouse";
 
 export default function Layout({ children }) {
 	return (
