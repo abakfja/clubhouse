@@ -11,7 +11,7 @@ export default function Dashboard() {
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
-			<div className="bg-gray-100">
+			<div className="bg-gray-100 h-full">
 				<div className="container mx-auto max-w-6xl box-border">
 					<div className=" flex flex-row py-8 items-start">
 						<LeftContainer />
