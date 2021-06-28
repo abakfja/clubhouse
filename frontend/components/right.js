@@ -2,39 +2,12 @@ import Image from "next/image";
 
 const eventData = [
 	{
-		id: 1,
-		date: new Date(2021, 6, 1),
-		events: [{ name: "First Event", time: "5:30 - 6:30" }],
-	},
-	{
 		id: 2,
 		date: new Date(2021, 6, 2),
 		events: [
 			{
 				name: "Second Event",
 				time: "4:30 - 6:30",
-			},
-			{
-				name: "Second Event",
-				time: "5:30 - 6:30",
-			},
-		],
-	},
-	{
-		id: 3,
-		date: new Date(2021, 6, 4),
-		events: [
-			{
-				name: "Third Event",
-				time: "4:30 - 6:30",
-			},
-			{
-				name: "Third Event",
-				time: "5:30 - 6:30",
-			},
-			{
-				name: "Third Event",
-				time: "6:30 - 7:30",
 			},
 		],
 	},
