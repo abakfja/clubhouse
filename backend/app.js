@@ -1,20 +1,70 @@
+// Express
 const express = require("express");
+const app = express();
 
+// Mongoose
 const mongoose = require("mongoose");
+const config = require("config");
+
+const dbConfig = config.get("dbConfig");
+const uri = `mongodb+srv://${dbConfig.user}:${dbConfig.password}@master.kuwlw.mongodb.net/${dbConfig.dbName}?retryWrites=true&w=majority`;
+
+(async () =>
+  await mongoose.connect(
+    uri,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    },
+    () => console.log("connected")
+  ))();
+
+// // Cors
 const cors = require("cors");
 
-const app = express();
 app.use(cors);
 
-const password = process.env.ATLASPASSWORD || "EjBUcLdZIOFwnUYr";
 
-const uri =
-    `mongodb+srv://superuser:${password}@master.kuwlw.mongodb.net/clubhouse?retryWrites=true&w=majority`;
+const cookieParser = require("cookie-parser");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// Routes
+app.get("/", async (req, res) => {
+  return res.status(200).json({
+    suc: true,
+    msg: "Welcome",
+  });
+});
 
+
+// No routes found or errors
+const globalErrorHandler = require('./utils/globalerror');
+const AppError = require('./utils/AppError');
+
+app.all('*', (req, res, next) =>
+	next(new AppError(`Unable to find ${req.originalUrl} on the server.`, 404))
+);
+
+app.use(globalErrorHandler);
+
+// Start server
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-    console.log(`server at http://localhost:${port}`);
+  console.log(`server at http://localhost:${port}`);
+});
+
+
+
+exports.getApplication = handleAsync(async (req, res, next) => {
+	const app = await Application.findById(req.params.id);
+	if (!app) return next(new AppError('The application doesnot exist.', 404));
+
+	res.status(200).json({
+		status: 'success',
+		data: { app },
+	});
 });

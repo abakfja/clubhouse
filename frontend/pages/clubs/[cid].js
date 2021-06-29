@@ -4,16 +4,16 @@ import Head from "next/head";
 
 const Post = () => {
 	const router = useRouter();
-	const { gid } = router.query;
+	const { cid } = router.query;
 
-	const pageTitle = `${gid} | Clubhouse`;
+	const pageTitle = `${cid} | Clubhouse`;
 
 	return (
 		<Layout>
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
-			<p>Group: {gid}</p>
+			<p>Club: {cid}</p>
 		</Layout>
 	);
 };
