@@ -22,6 +22,7 @@ const clubSchema = new Schema({
         ref: 'User',
       },
       name: String,
+      image_url: String
     },
   ],
   moderators: [
@@ -31,6 +32,7 @@ const clubSchema = new Schema({
         ref: 'User',
       },
       name: String,
+      image_url: String
     },
   ],
   created_at: {

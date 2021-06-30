@@ -56,15 +56,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`server at http://localhost:${port}`);
 });
-
-
-
-exports.getApplication = handleAsync(async (req, res, next) => {
-	const app = await Application.findById(req.params.id);
-	if (!app) return next(new AppError('The application doesnot exist.', 404));
-
-	res.status(200).json({
-		status: 'success',
-		data: { app },
-	});
-});

@@ -14,7 +14,6 @@ const eventSchema = new Schema(
     },
     image_url: {
       type: String,
-      maxlen: 255,
     },
     start_time: {
       type: Date,
@@ -29,7 +28,7 @@ const eventSchema = new Schema(
     },
     end_time: {
       type: Date,
-      required: [true, 'Start time for the event is required.'],
+      required: [true, 'End time for the event is required.'],
       validate: {
         validator: function (date) {
           return new Date(date) > Date.now();
@@ -38,12 +37,25 @@ const eventSchema = new Schema(
       },
       index: true,
     },
+    club: {
+      id: {
+        type: Schema.Types.ObjectId, // mongoose.Schema.Types.ObjectId
+        ref: 'Club',
+      },
+      name: String,
+      image_url: String
+    },
     creator: {
       id: {
         type: Schema.Types.ObjectId, // mongoose.Schema.Types.ObjectId
         ref: 'User',
       },
       name: String,
+      image_url: String
+    },
+    created_at: {
+      type: Date,
+      default: Date.now(),
     },
   },
   {
@@ -51,7 +63,8 @@ const eventSchema = new Schema(
     toObject: { virtuals: true },
     toJSON: { virtuals: true },
     timestamps: true,
-  }
+  },
+  
 );
 
 eventSchema.index({});

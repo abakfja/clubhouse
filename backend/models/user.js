@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const validator = require('validator');
-const argon2 = require("argon2");
+const argon2 = require('argon2');
 
 const userSchema = new Schema({
   name: {
@@ -36,15 +36,19 @@ const userSchema = new Schema({
         ref: 'User',
       },
       name: String,
-      image_url: String
+      image_url: String,
     },
   ],
+  tokenVersion: {
+    type: Number,
+    default: 0,
+  },
 });
 
 userSchema.pre('save', async function (next) {
-	const hash = await argon2.hash(this.password);
-	this.password = hash;
-	next();
+  const hash = await argon2.hash(this.password);
+  this.password = hash;
+  next();
 });
 
 const User = model('User', userSchema);

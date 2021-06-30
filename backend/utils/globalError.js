@@ -4,6 +4,7 @@ const sendError = (err, res) => {
 	console.log(err.stack);
 
 	res.status(err.statusCode).json({
+		suc: false,
 		status: err.status,
 		message: err.message,
 		error: err,
