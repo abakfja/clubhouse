@@ -39,6 +39,16 @@ app.get("/", async (req, res) => {
   });
 });
 
+const userRoutes = require('./routes/user');
+const clubRoutes = require('./routes/club');
+const eventRoutes = require('./routes/event');
+const authRoutes = require('./routes/auth');
+
+app.use("/api/user", userRoutes);
+app.use("/api/club", clubRoutes);
+app.use("/api/event", eventRoutes);
+app.use("/api/auth", authRoutes);
+
 
 // No routes found or errors
 const globalErrorHandler = require('./utils/globalerror');

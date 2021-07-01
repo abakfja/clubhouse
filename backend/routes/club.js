@@ -2,10 +2,11 @@ const express = require('express');
 const Club = require('../models/club');
 const Event = require('../models/event');
 const handleAsync = require('../utils/handleAsync');
-const AppError = require('../utils/AppError')
+const AppError = require('../utils/AppError');
 
 const router = express.Router();
 
+// Get data of single club
 router.get(
   '/:cid',
   handleAsync(async (req, res, next) => {
@@ -18,6 +19,7 @@ router.get(
   })
 );
 
+// Get all events of a club
 router.get(
   '/:cid/events',
   handleAsync(async (req, res, next) => {
@@ -35,8 +37,10 @@ router.get(
   })
 );
 
+// Create a club
 router.post(
-  '/', handleAsync(async (req, res, next) => {
+  '/',
+  handleAsync(async (req, res, next) => {
     const { name, description, image_url } = req.body;
     const { _id, name: username, image_url: user_image_url } = req.user;
     obj = {
@@ -47,6 +51,15 @@ router.post(
       moderators: [{ id: _id, name: username, image_url: user_image_url }],
     };
     const club = await Club.create(obj);
+    const clubData = {
+      id: club._id,
+      name: club.name,
+      image_url: club.image_url,
+      is_mod: true,
+    };
+    const user = await User.findById(req.user._id);
+    user.clubs.push(clubData);
+    await user.save();
     return res.status(201).json({
       suc: true,
       object: club,
@@ -54,8 +67,10 @@ router.post(
   })
 );
 
+// Join a club
 router.patch(
-  '/:cid/join', handleAsync(async (req, res, next) => {
+  '/:cid/join',
+  handleAsync(async (req, res, next) => {
     let club = await Club.findById(req.params.cid);
     if (!club) return next(new AppError('The club doesnot exist', 404));
     const { _id, name: username, image_url: user_image_url } = req.user;
@@ -67,15 +82,26 @@ router.patch(
       return next(new AppError('Already a member', 400));
     }
     club.members.push(userData);
+    const clubData = {
+      id: club._id,
+      name: club.name,
+      image_url: club.image_url,
+    };
+    const user = await User.findById(req.user._id);
+    user.clubs.push(clubData);
     await club.save();
+    await user.save();
     return res.status(202).json({
       suc: true,
     });
   })
 );
 
+
+// Promote to a mod of club
 router.patch(
-  '/:cid/mod', handleAsync(async (req, res, next) => {
+  '/:cid/mod',
+  handleAsync(async (req, res, next) => {
     let club = await Club.findById(req.params.cid);
     if (!club) return next(new AppError('The club doesnot exist', 404));
 
@@ -101,12 +127,25 @@ router.patch(
 
     club.moderators.push(userData);
     await club.save();
+
+const clubData = {
+      id: club._id,
+      name: club.name,
+      image_url: club.image_url,
+      is_mod: true,
+    };
+    const promotedUser = await User.findById(userid);
+    promotedUser.clubs = promotedUser.clubs.filter((el) => el.id !== club._id );
+    promoted.clubs.push(clubData);
+    await promotedUser.save();
+
     return res.status(200).json({
       suc: true,
     });
   })
 );
 
+// Create event
 router.post(
   '/:cid',
   handleAsync(async (req, res, next) => {

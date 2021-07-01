@@ -33,10 +33,14 @@ const userSchema = new Schema({
     {
       id: {
         type: Schema.Types.ObjectId, // mongoose.Schema.Types.ObjectId
-        ref: 'User',
+        ref: 'Club',
       },
       name: String,
       image_url: String,
+      is_mod: {
+        type: Boolean,
+        default: false
+      }
     },
   ],
   tokenVersion: {

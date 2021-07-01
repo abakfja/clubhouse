@@ -62,8 +62,8 @@ router.post(
 );
 
 
-post("/refresh_token", handleAsync(async (req, res) => {
-  const token = req.cookies.jid;
+router.post("/refresh_token", handleAsync(async (req, res) => {
+  const token = req.cookies.cid;
   if (!token) {
     return res.send({ ok: false, accessToken: "" });
   }
@@ -92,23 +92,9 @@ post("/refresh_token", handleAsync(async (req, res) => {
   return res.status(200).json({ suc: true, accessToken: createAccessToken(user) });
 }));
 
+router.post('/logout', handleAsync(async (req, res) => {
+  sendRefreshToken(res, "");
+  return res.status(200).json({ suc: true, accessToken: createAccessToken(user) });
+}))
+
 module.exports = router;
-
-/*
-const createSignToken = (id) => {
-	return jwt.sign({ id }, process.env.JWT_SECRET, {
-		expiresIn: process.env.JWT_EXPIRY,
-	});
-};
-
-const sendToken = (user, statusCode, res) => {
-	const token = createSignToken(user._id);
-
-	// user.password = undefined;
-	res.status(statusCode).json({
-		status: 'success',
-		token,
-		user,
-	});
-};
-*/
