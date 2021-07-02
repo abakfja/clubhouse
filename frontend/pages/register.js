@@ -1,7 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+import { sendData } from "../api";
+
+import Input from "../components/control/Input";
+import SubmitButton from "../components/control/SubmitButton";
 
 const Register = () => {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const onSubmit = async (e) => {
+		e.preventDefault();
+
+		const body = {
+			name,
+			email,
+			password,
+		};
+		console.log(body);
+		try {
+			console.log("Making request");
+			const data = await sendData("/auth/register", body);
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div className="lg:flex flex-row-reverse">
 			<div className="lg:w-1/2 xl:max-w-screen-sm mr-8">
@@ -44,47 +72,28 @@ const Register = () => {
 					</h2>
 					<div className="mt-12">
 						<form>
-							<div>
-								<div className="text-sm font-bold text-gray-700 tracking-wide">
-									Full Name
-								</div>
-								<input
-									className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-									type=""
-									placeholder="John Snow"
-								/>
-							</div>
-							<div className="mt-8">
-								<div className="text-sm font-bold text-gray-700 tracking-wide">
-									Email Address
-								</div>
-								<input
-									className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-									type=""
-									placeholder="john.snow@yahoo.com"
-								/>
-							</div>
-							<div className="mt-8">
-								<div className="flex justify-between items-center">
-									<div className="text-sm font-bold text-gray-700 tracking-wide">
-										Password
-									</div>
-								</div>
-								<input
-									className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-									type="password"
-									placeholder="Enter your password"
-								/>
-							</div>
-							<div className="mt-10">
-								<button
-									className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
-                                        font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
-                                        shadow-lg"
-								>
-									Register
-								</button>
-							</div>
+							<Input
+								label="Full Name"
+								type="text"
+								placeholder="John Snow"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+							/>
+							<Input
+								label="Email Address"
+								type="email"
+								placeholder="john.snow@yahoo.com"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+							<Input
+								label="Password"
+								type="password"
+								placeholder="Enter your password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<SubmitButton onClick={(e) => onSubmit(e)} label="Register" />
 						</form>
 						<div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
 							{"Already have an account ? "}

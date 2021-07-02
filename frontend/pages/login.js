@@ -1,7 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+import { sendData } from "../api";
+
+import Input from "../components/control/Input";
+import SubmitButton from "../components/control/SubmitButton";
 
 const Login = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		const body = {
+			email,
+			password,
+		};
+		try {
+			const data = await sendData("/auth/login", body);
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div className="lg:flex">
 			<div className="lg:w-1/2 xl:max-w-screen-sm ml-8">
@@ -42,47 +65,24 @@ const Login = () => {
 					>
 						Log in
 					</h2>
-					<div className="mt-12">
+					<div className="mt-4">
 						<form>
-							<div>
-								<div className="text-sm font-bold text-gray-700 tracking-wide">
-									Email Address
-								</div>
-								<input
-									className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-									type=""
-									placeholder="mike@gmail.com"
-								/>
-							</div>
-							<div className="mt-8">
-								<div className="flex justify-between items-center">
-									<div className="text-sm font-bold text-gray-700 tracking-wide">
-										Password
-									</div>
-									<div>
-										<a
-											className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
-                                                cursor-pointer"
-										>
-											Forgot Password?
-										</a>
-									</div>
-								</div>
-								<input
-									className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-									type="password"
-									placeholder="Enter your password"
-								/>
-							</div>
-							<div className="mt-10">
-								<button
-									className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
-                                        font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
-                                        shadow-lg"
-								>
-									Log In
-								</button>
-							</div>
+							<Input
+								label="Email Address"
+								type="email"
+								placeholder="john.snow@yahoo.com"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+
+							<Input
+								label="Password"
+								type="password"
+								placeholder="Enter your password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<SubmitButton onClick={(e) => onSubmit(e)} label="Sign In" />
 						</form>
 						<div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
 							{"Don't have an account ? "}
