@@ -2,9 +2,9 @@ const express = require('express');
 
 const Club = require('../models/club');
 const Event = require('../models/event');
+const User = require('../models/user');
 const handleAsync = require('../utils/handleAsync');
 const AppError = require('../utils/AppError');
-const User = require('../models/user');
 
 // /api/user
 const router = express.Router();

@@ -20,15 +20,19 @@ const uri = `mongodb+srv://${dbConfig.user}:${dbConfig.password}@master.kuwlw.mo
     () => console.log("connected")
   ))();
 
-// // Cors
+// Cors
 const cors = require("cors");
 
-app.use(cors);
+const corsOptions = {
+  origin: true, //included origin as true
+  credentials: true, //included credentials as true
+};
+app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 const cookieParser = require("cookie-parser");
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Routes
@@ -51,7 +55,7 @@ app.use("/api/auth", authRoutes);
 
 
 // No routes found or errors
-const globalErrorHandler = require('./utils/globalerror');
+const globalErrorHandler = require('./utils/globalError');
 const AppError = require('./utils/AppError');
 
 app.all('*', (req, res, next) =>

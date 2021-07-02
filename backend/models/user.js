@@ -23,7 +23,6 @@ const userSchema = new Schema({
     required: true,
     maxlength: 255,
     minlength: [4, 'Password should have atleast 4 characters.'],
-    select: false,
   },
   image_url: {
     type: String,

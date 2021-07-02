@@ -97,7 +97,6 @@ router.patch(
   })
 );
 
-
 // Promote to a mod of club
 router.patch(
   '/:cid/mod',
@@ -128,14 +127,14 @@ router.patch(
     club.moderators.push(userData);
     await club.save();
 
-const clubData = {
+    const clubData = {
       id: club._id,
       name: club.name,
       image_url: club.image_url,
       is_mod: true,
     };
     const promotedUser = await User.findById(userid);
-    promotedUser.clubs = promotedUser.clubs.filter((el) => el.id !== club._id );
+    promotedUser.clubs = promotedUser.clubs.filter((el) => el.id !== club._id);
     promoted.clubs.push(clubData);
     await promotedUser.save();
 

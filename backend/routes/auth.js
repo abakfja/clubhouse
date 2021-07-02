@@ -46,14 +46,13 @@ router.post(
     if (!user) {
       next(new AppError('Could not find user', 400));
     }
-
-    const valid = argon2.verify(user.password, password);
+    console.log(user)
+    const valid = await argon2.verify(user.password, password);
 
     if (!valid) {
       next(new AppError('Bad password', 400));
     }
     sendRefreshToken(res, createRefreshToken(user));
-
     res.status(200).json({
       accessToken: createAccessToken(user),
       user,
@@ -63,6 +62,7 @@ router.post(
 
 
 router.post("/refresh_token", handleAsync(async (req, res) => {
+  console.log(req)
   const token = req.cookies.cid;
   if (!token) {
     return res.send({ ok: false, accessToken: "" });

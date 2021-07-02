@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "argon2": "^0.28.2",
+    "config": "^3.3.6",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "elasticsearch": "^16.7.2",
