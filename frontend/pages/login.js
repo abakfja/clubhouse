@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from 'next/router'
 
-import { sendData } from "../api";
+import { sendData, setHeaders } from "../api";
 
 import Input from "../components/control/Input";
 import SubmitButton from "../components/control/SubmitButton";
@@ -10,6 +11,7 @@ import SubmitButton from "../components/control/SubmitButton";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const router = useRouter();
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -18,8 +20,9 @@ const Login = () => {
 			password,
 		};
 		try {
-			const data = await sendData("/auth/login", body);
-			console.log(data);
+			const {accessToken} = await sendData("/auth/login", body);
+			setHeaders(accessToken);
+			router.push("/dashboard");
 		} catch (error) {
 			console.log(error);
 		}

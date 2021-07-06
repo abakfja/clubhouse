@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import { sendData } from "../api";
 
@@ -11,6 +12,7 @@ const Register = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const router = useRouter();
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -25,7 +27,9 @@ const Register = () => {
 			console.log("Making request");
 			const data = await sendData("/auth/register", body);
 			console.log(data);
+			router.push("/login");
 		} catch (error) {
+			console.log("Made error");
 			console.log(error);
 		}
 	};

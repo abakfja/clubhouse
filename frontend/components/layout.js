@@ -5,7 +5,7 @@ export const siteTitle = "Clubhouse";
 
 export default function Layout({ children }) {
 	return (
-		<div>
+		<div className="h-screen bg-gray-100">
 			<Head>
 				<link rel="icon" href="/favicon.ico" />
 				<meta
