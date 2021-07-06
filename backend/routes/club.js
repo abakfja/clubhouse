@@ -3,6 +3,8 @@ const Club = require('../models/club');
 const Event = require('../models/event');
 const handleAsync = require('../utils/handleAsync');
 const AppError = require('../utils/AppError');
+const Auth = require('../middlewares/auth');
+
 
 const router = express.Router();
 
@@ -36,6 +38,8 @@ router.get(
     });
   })
 );
+
+router.use(Auth)
 
 // Create a club
 router.post(

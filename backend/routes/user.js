@@ -5,9 +5,11 @@ const Event = require('../models/event');
 const User = require('../models/user');
 const handleAsync = require('../utils/handleAsync');
 const AppError = require('../utils/AppError');
+const Auth = require('../middlewares/auth');
 
 // /api/user
 const router = express.Router();
+router.use(Auth);
 router.get(
   '/',
   handleAsync(async (req, res, next) => {
