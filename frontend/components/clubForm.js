@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import Input from "./control/Input";
+import { sendData } from "../api";
 
 export default function ClubForm({ onClose }) {
 	const [clubName, setClubName] = useState("");
@@ -8,8 +8,22 @@ export default function ClubForm({ onClose }) {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		const body = {
+			name: clubName,
+			description: clubDescription,
+			image_url: "",
+		};
+
+		try {
+			console.log("making req");
+			const response = await sendData("/club", body);
+			console.log("done req", response);
+		} catch (err) {
+			console.log(err);
+		}
 		onClose();
 	};
+
 	return (
 		<>
 			<div className="sm:max-w-lg w-full p-4 bg-white rounded-xl z-10">
@@ -28,7 +42,7 @@ export default function ClubForm({ onClose }) {
 							onChange={(e) => setClubName(e.target.value)}
 							className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
 							type="text"
-							placeholder="mail@gmail.com"
+							placeholder="Some Name"
 						/>
 					</div>
 

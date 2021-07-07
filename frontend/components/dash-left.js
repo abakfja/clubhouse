@@ -6,8 +6,10 @@ import {
 	ArrowCircleRightIcon,
 } from "@heroicons/react/solid";
 import ClubForm from "./clubForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MyDialog from "./control/Dialog";
+import useSWR from "swr";
+import fetcher from "../api";
 
 const groups = [
 	"adkjsf;asdfj",
@@ -26,7 +28,32 @@ const admin = [
 ];
 
 const LeftContainer = () => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
+	const [isFetching, setIsFetching] = useState(false);
+
+	const onDialogClose = () => {
+		setIsOpen(false);
+		setIsFetching(!isFetching);
+	};
+
+	useEffect(() => {
+		console.log("fetched again");
+	}, [isFetching]);
+
+	const { data, error } = useSWR("/user", fetcher);
+
+	if (error) {
+		console.log(error);
+		return <div>failed to load </div>;
+	}
+	if (!data) return <div>loading...</div>;
+	console.log(data);
+
+	const { suc, obj } = data;
+
+	const mod_clubs = obj.clubs.filter((el) => el.is_mod);
+	const member_clubs = obj.clubs.filter((el) => !el.is_mod);
+	console.log(mod_clubs, member_clubs)
 
 	const MyList = ({ items }) => {
 		return (
@@ -39,7 +66,7 @@ const LeftContainer = () => {
 						<span className="flex items-center h-6">
 							<ArrowCircleRightIcon className="flex-shrink-0 h-5 w-5 text-cyan-500" />
 						</span>
-						<p className="ml-2">{item}</p>
+						<p className="ml-2">{item.name}</p>
 					</div>
 				))}
 			</ul>
@@ -92,7 +119,7 @@ const LeftContainer = () => {
 							height={80}
 						/>
 					</div>
-					<div className="text-3xl font-bold m-0">Username</div>
+					<div className="text-3xl font-bold m-0">{obj.name}</div>
 				</div>
 				<div
 					onClick={() => setIsOpen(true)}
@@ -106,11 +133,11 @@ const LeftContainer = () => {
 					</p>
 				</div>
 				<div className="w-4/5 flex flex-col justify-center items-start">
-					<MyDisclosure title={"Moderating"} items={admin} open={true} />
-					<MyDisclosure title={"Clubs"} items={groups} open={false} />
+					<MyDisclosure title={"Moderating"} items={mod_clubs} open={true} />
+					<MyDisclosure title={"Clubs"} items={member_clubs} open={false} />
 				</div>
-				<MyDialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
-					<ClubForm onClose = {() => setIsOpen(false)} />
+				<MyDialog isOpen={isOpen} onClose={onDialogClose}>
+					<ClubForm onClose={onDialogClose} />
 				</MyDialog>
 			</div>
 		</div>

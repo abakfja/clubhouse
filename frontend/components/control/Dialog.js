@@ -9,6 +9,7 @@ export default function MyDialog({ children, isOpen, onClose }) {
 				className="fixed inset-0 z-10 overflow-y-auto"
 				onClose={onClose}
 			>
+				<div className="absolute bg-black opacity-60 inset-0 z-0"></div>
 				<div className="min-h-screen px-4 text-center">
 					<Transition.Child
 						as={Fragment}
