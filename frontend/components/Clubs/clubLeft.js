@@ -5,42 +5,21 @@ import {
 	PlusCircleIcon,
 	ArrowCircleRightIcon,
 } from "@heroicons/react/solid";
-import ClubForm from "./clubForm";
-import { useState, useEffect } from "react";
-import MyDialog from "./control/Dialog";
-import useSWR from "swr";
-import fetcher from "../api";
-
-const groups = [
-	"adkjsf;asdfj",
-	"adjsfklaldsf",
-	"aldjsfkldasf",
-	"adfjdkladskd",
-	"afdfjskladskd",
-];
-
-const admin = [
-	"adfjsadksfad",
-	"fadkjsfkljad",
-	"fakdljsfklddddk",
-	"dfjadklsjfds",
-	"fjkldjasklfj",
-];
+// import ClubForm from "./clubForm";
+import { useState } from "react";
+import MyDialog from "../control/Dialog";
+import useSWR, { mutate } from "swr";
+import fetcher from "../../api";
 
 const LeftContainer = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isFetching, setIsFetching] = useState(false);
 
 	const onDialogClose = () => {
 		setIsOpen(false);
-		setIsFetching(!isFetching);
 	};
 
-	useEffect(() => {
-		console.log("fetched again");
-	}, [isFetching]);
-
-	const { data, error } = useSWR("/user", fetcher);
+	const url = "/users";
+	const { data, error } = useSWR(url, fetcher);
 
 	if (error) {
 		console.log(error);
@@ -53,7 +32,7 @@ const LeftContainer = () => {
 
 	const mod_clubs = obj.clubs.filter((el) => el.is_mod);
 	const member_clubs = obj.clubs.filter((el) => !el.is_mod);
-	console.log(mod_clubs, member_clubs)
+	console.log(mod_clubs, member_clubs);
 
 	const MyList = ({ items }) => {
 		return (
@@ -137,7 +116,7 @@ const LeftContainer = () => {
 					<MyDisclosure title={"Clubs"} items={member_clubs} open={false} />
 				</div>
 				<MyDialog isOpen={isOpen} onClose={onDialogClose}>
-					<ClubForm onClose={onDialogClose} />
+					{/* <ClubForm forceUpdate={() => mutate(url)} onClose={onDialogClose} /> */}
 				</MyDialog>
 			</div>
 		</div>

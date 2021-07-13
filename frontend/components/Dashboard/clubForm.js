@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useState } from "react";
-import { sendData } from "../api";
+import { sendData } from "../../api";
 
-export default function ClubForm({ onClose }) {
+export default function ClubForm({ onClose, forceUpdate }) {
 	const [clubName, setClubName] = useState("");
 	const [clubDescription, setClubDescription] = useState("");
 
@@ -16,8 +16,9 @@ export default function ClubForm({ onClose }) {
 
 		try {
 			console.log("making req");
-			const response = await sendData("/club", body);
+			const response = await sendData("/clubs", body);
 			console.log("done req", response);
+			forceUpdate();
 		} catch (err) {
 			console.log(err);
 		}

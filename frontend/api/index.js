@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "http://localhost:8080/api";
+const baseurl = "http://localhost:8000/api";
 
 const fetcher = (url) => axios.get(`${baseurl}${url}`).then((res) => res.data);
 

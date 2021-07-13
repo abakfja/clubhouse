@@ -1,6 +1,6 @@
 import Image from "next/image";
 import useSWR from "swr";
-import fetcher from "../api";
+import fetcher from "../../api";
 
 let eventData = [
 	{
@@ -54,7 +54,7 @@ let eventData = [
 ];
 
 export default function RightContainer() {
-	const { data, error } = useSWR("/user/events", fetcher);
+	const { data, error } = useSWR("/users/events", fetcher);
 	if (error) {
 		console.log(error);
 		return <div>failed to load </div>;

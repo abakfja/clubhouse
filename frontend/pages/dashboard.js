@@ -1,20 +1,12 @@
 import Head from "next/head";
 
-import useSWR from "swr";
-
-import fetcher from "../api";
-
 import Layout, { siteTitle } from "../components/layout";
-import LeftContainer from "../components/dash-left";
-import RightContainer from "../components/dash-right";
-
+import LeftContainer from "../components/Dashboard/dashLeft";
+import RightContainer from "../components/Dashboard/dashRight";
 
 const pageTitle = "Dashboard | Clubhouse";
 
 export default function Dashboard() {
-	
-
-
 	return (
 		<Layout>
 			<Head>
