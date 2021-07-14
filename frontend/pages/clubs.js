@@ -25,11 +25,24 @@ const Post = () => {
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
-			<div className="container m-8 text-center mx-auto max-w-xl">
-				<SearchBar setStartSearch={setStartSearch} />
-				<div className="mt-12 flex-col items-center justify-center">
-					{/* {clubs.length ? <></> : <p> No clubs to display</p>} */}
-					<LightCard />
+			<div className="m-8">
+				<div className="text-center mx-auto max-w-2xl container">
+					<SearchBar setStartSearch={setStartSearch} />
+				</div>
+				<div
+					className="mt-16 grid mx-auto max-w-6xl"
+					style={{
+						gridTemplateColumns: "repeat(auto-fit, minmax(25rem, 1fr))",
+						gridGap: "3rem",
+					}}
+				>
+					{clubs.map((club, index) =>
+						index % 4 == 0 || index % 4 == 3 ? (
+							<LightCard club={club} key={club._id} />
+						) : (
+							<DarkCard club={club} key={club._id} />
+						)
+					)}
 				</div>
 			</div>
 		</Layout>

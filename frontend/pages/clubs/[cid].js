@@ -19,7 +19,7 @@ const Post = () => {
 			<div className=" h-full">
 				<div className="container mx-auto max-w-6xl box-border">
 					<div className=" flex flex-row py-8 items-start">
-						{/* <LeftContainer /> */}
+						<LeftContainer />
 						<RightContainer />
 					</div>
 				</div>
