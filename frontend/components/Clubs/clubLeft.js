@@ -5,20 +5,20 @@ import {
 	PlusCircleIcon,
 	ArrowCircleRightIcon,
 } from "@heroicons/react/solid";
-// import ClubForm from "./clubForm";
+import EventForm from "./eventForm";
 import { useState } from "react";
 import MyDialog from "../control/Dialog";
 import useSWR, { mutate } from "swr";
 import fetcher from "../../api";
 
-const LeftContainer = () => {
+const LeftContainer = ({ cid }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const onDialogClose = () => {
 		setIsOpen(false);
 	};
 
-	const url = "/users";
+	const url = `/clubs/${cid}`;
 	const { data, error } = useSWR(url, fetcher);
 
 	if (error) {
@@ -29,28 +29,6 @@ const LeftContainer = () => {
 	console.log(data);
 
 	const { suc, obj } = data;
-
-	const mod_clubs = obj.clubs.filter((el) => el.is_mod);
-	const member_clubs = obj.clubs.filter((el) => !el.is_mod);
-	console.log(mod_clubs, member_clubs);
-
-	const MyList = ({ items }) => {
-		return (
-			<ul className="flex flex-col w-full space-y-2">
-				{items.map((item, index) => (
-					<div
-						className="flex items-start flex-grow p-1 rounded-md bg-gray-50"
-						key={index}
-					>
-						<span className="flex items-center h-6">
-							<ArrowCircleRightIcon className="flex-shrink-0 h-5 w-5 text-cyan-500" />
-						</span>
-						<p className="ml-2">{item.name}</p>
-					</div>
-				))}
-			</ul>
-		);
-	};
 
 	const MyDisclosure = ({ items, title, open }) => {
 		return (
@@ -76,7 +54,19 @@ const LeftContainer = () => {
 							className="w-full"
 						>
 							<Disclosure.Panel className="pt-2 w-full pb-2 text-sm text-gray-500">
-								<MyList items={items} />
+								<ul className="flex flex-col w-full space-y-2">
+									{items.map((item, index) => (
+										<div
+											className="flex items-start flex-grow p-1 rounded-md bg-gray-50"
+											key={index}
+										>
+											<span className="flex items-center h-6">
+												<ArrowCircleRightIcon className="flex-shrink-0 h-5 w-5 text-cyan-500" />
+											</span>
+											<p className="ml-2">{item.name}</p>
+										</div>
+									))}
+								</ul>
 							</Disclosure.Panel>
 						</Transition>
 					</>
@@ -99,6 +89,7 @@ const LeftContainer = () => {
 						/>
 					</div>
 					<div className="text-3xl font-bold m-0">{obj.name}</div>
+					<div className="text-l mt-2">{obj.description}</div>
 				</div>
 				<div
 					onClick={() => setIsOpen(true)}
@@ -108,15 +99,18 @@ const LeftContainer = () => {
 						<PlusCircleIcon className="h-6 w-6" />
 					</div>
 					<p type="button" className=" ">
-						New Club
+						New Event
 					</p>
 				</div>
 				<div className="w-4/5 flex flex-col justify-center items-start">
-					<MyDisclosure title={"Moderating"} items={mod_clubs} open={true} />
-					<MyDisclosure title={"Clubs"} items={member_clubs} open={false} />
+					<MyDisclosure
+						title={"Moderators"}
+						items={obj.moderators}
+						open={true}
+					/>
 				</div>
 				<MyDialog isOpen={isOpen} onClose={onDialogClose}>
-					{/* <ClubForm forceUpdate={() => mutate(url)} onClose={onDialogClose} /> */}
+					<EventForm forceUpdate={() => mutate(url)} onClose={onDialogClose} />
 				</MyDialog>
 			</div>
 		</div>

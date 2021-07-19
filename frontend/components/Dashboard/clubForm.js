@@ -55,7 +55,7 @@ export default function ClubForm({ onClose, forceUpdate }) {
 							value={clubDescription}
 							onChange={(e) => setClubDescription(e.target.value)}
 							name="message"
-							className="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  p-2"
+							className="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
 							placeholder="Enter your comapny info"
 							spellCheck="false"
 							style={{ resize: "none" }}
@@ -65,7 +65,7 @@ export default function ClubForm({ onClose, forceUpdate }) {
 						<label className="font-semibold text-gray-600 pt-2 pl-1 text-xs"></label>
 						<div className="flex items-center justify-center w-full">
 							<label className="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center">
-								<div className="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
+								<div className="h-full w-full text-center flex flex-col items-center justify-center">
 									<div className="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
 										<Image
 											width={338}

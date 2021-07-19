@@ -34,24 +34,6 @@ const LeftContainer = () => {
 	const member_clubs = obj.clubs.filter((el) => !el.is_mod);
 	console.log(mod_clubs, member_clubs);
 
-	const MyList = ({ items }) => {
-		return (
-			<ul className="flex flex-col w-full space-y-2">
-				{items.map((item, index) => (
-					<div
-						className="flex items-start flex-grow p-1 rounded-md bg-gray-50"
-						key={index}
-					>
-						<span className="flex items-center h-6">
-							<ArrowCircleRightIcon className="flex-shrink-0 h-5 w-5 text-cyan-500" />
-						</span>
-						<p className="ml-2">{item.name}</p>
-					</div>
-				))}
-			</ul>
-		);
-	};
-
 	const MyDisclosure = ({ items, title, open }) => {
 		return (
 			<Disclosure open>
@@ -76,7 +58,19 @@ const LeftContainer = () => {
 							className="w-full"
 						>
 							<Disclosure.Panel className="pt-2 w-full pb-2 text-sm text-gray-500">
-								<MyList items={items} />
+								<ul className="flex flex-col w-full space-y-2">
+									{items.map((item, index) => (
+										<div
+											className="flex items-start flex-grow p-1 rounded-md bg-gray-50"
+											key={index}
+										>
+											<span className="flex items-center h-6">
+												<ArrowCircleRightIcon className="flex-shrink-0 h-5 w-5 text-cyan-500" />
+											</span>
+											<p className="ml-2">{item.name}</p>
+										</div>
+									))}
+								</ul>
 							</Disclosure.Panel>
 						</Transition>
 					</>

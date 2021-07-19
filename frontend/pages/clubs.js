@@ -17,7 +17,7 @@ const Post = () => {
 		return <div>failed to load </div>;
 	}
 	// if (!data) return <div>loading...</div>;
-	const clubs = data?.object || [];
+	const clubs = data?.obj || [];
 	console.log(clubs);
 
 	return (
