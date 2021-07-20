@@ -39,19 +39,19 @@ const eventSchema = new Schema(
     },
     club: {
       id: {
-        type: Schema.Types.ObjectId, // mongoose.Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
         ref: 'Club',
       },
       name: String,
-      image_url: String
+      image_url: String,
     },
     creator: {
       id: {
-        type: Schema.Types.ObjectId, // mongoose.Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
         ref: 'User',
       },
       name: String,
-      image_url: String
+      image_url: String,
     },
     created_at: {
       type: Date,
@@ -63,8 +63,7 @@ const eventSchema = new Schema(
     toObject: { virtuals: true },
     toJSON: { virtuals: true },
     timestamps: true,
-  },
-  
+  }
 );
 
 eventSchema.index({});

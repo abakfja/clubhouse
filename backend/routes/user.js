@@ -1,19 +1,22 @@
 const express = require('express');
 
+const Auth = require('../middlewares/auth');
+
 const Club = require('../models/club');
 const Event = require('../models/event');
 const User = require('../models/user');
+
 const handleAsync = require('../utils/handleAsync');
-const AppError = require('../utils/AppError');
-const Auth = require('../middlewares/auth');
 
 // /api/user
 const router = express.Router();
+
 router.use(Auth);
+
 router.get(
   '/',
   handleAsync(async (req, res, next) => {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user._id).select('-password');
     return res.status(200).json({
       suc: true,
       obj: user,

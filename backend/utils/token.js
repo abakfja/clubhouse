@@ -8,7 +8,7 @@ const createAccessToken = (user) => {
     { userId: user.id },
     authConfig.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "15m",
+      expiresIn: "7d",
     }
   );
 };
