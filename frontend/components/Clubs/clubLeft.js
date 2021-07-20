@@ -110,7 +110,11 @@ const LeftContainer = ({ cid }) => {
 					/>
 				</div>
 				<MyDialog isOpen={isOpen} onClose={onDialogClose}>
-					<EventForm forceUpdate={() => mutate(url)} onClose={onDialogClose} />
+					<EventForm
+						cid={cid}
+						forceUpdate={() => mutate(url)}
+						onClose={onDialogClose}
+					/>
 				</MyDialog>
 			</div>
 		</div>
