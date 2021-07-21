@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Disclosure, Transition } from "@headlessui/react";
 import {
 	ChevronUpIcon,
@@ -67,7 +68,9 @@ const LeftContainer = () => {
 											<span className="flex items-center h-6">
 												<ArrowCircleRightIcon className="flex-shrink-0 h-5 w-5 text-cyan-500" />
 											</span>
-											<p className="ml-2">{item.name}</p>
+											<Link href={`/clubs/${item.id}`}>
+												<a className="ml-2">{item.name}</a>
+											</Link>
 										</div>
 									))}
 								</ul>

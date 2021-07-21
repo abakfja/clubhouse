@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 import { sendData, setHeaders } from "../api";
 
@@ -20,7 +20,7 @@ const Login = () => {
 			password,
 		};
 		try {
-			const {accessToken} = await sendData("/auth/login", body);
+			const { accessToken } = await sendData("/auth/login", body);
 			setHeaders(accessToken);
 			router.push("/dashboard");
 		} catch (error) {

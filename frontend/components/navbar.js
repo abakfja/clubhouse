@@ -1,20 +1,23 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import Link from "next/link";
-
-const navigation = [
-	{ name: "Dashboard", href: "/dashboard", current: true },
-	{ name: "Clubs", href: "/clubs", current: false },
-];
+import { useRouter } from "next/router";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Navbar() {
+	const navigation = [
+		{ name: "Dashboard", href: "/dashboard" },
+		{ name: "Clubs", href: "/clubs" },
+	];
+
+	const router = useRouter();
+
 	return (
 		<Disclosure as="nav" className="bg-gray-800">
 			{({ open }) => (
@@ -44,18 +47,18 @@ export default function Example() {
 								</div>
 								<div className="hidden sm:block sm:ml-6">
 									<div className="flex space-x-4">
-										{navigation.map((item) => (
-											<Link key={item.name} href={item.href}>
+										{navigation.map((item, index) => (
+											<Link href={item.href} key={index}>
 												<a
 													className={classNames(
-														item.current
+														router.pathname === item.href
 															? "bg-gray-900 text-white"
 															: "text-gray-300 hover:bg-gray-700 hover:text-white",
 														"px-3 py-2 rounded-md text-sm font-medium"
 													)}
 													aria-current={item.current ? "page" : undefined}
 												>
-													{item.name}
+													<p>{item.name}</p>
 												</a>
 											</Link>
 										))}
