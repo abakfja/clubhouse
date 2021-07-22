@@ -1,4 +1,4 @@
-# clubhouse@iiit
+# Clubhouse@IIITH
 ![clubhouse](https://user-images.githubusercontent.com/48274694/126592193-6d58e101-37cf-4e4a-a708-ea9234493039.png)
 
 Clubhouse was born out of us missing too many events in IIIT, simply because we did not even know they were happening. Then in became clear that we needed a platform that would be the one stop for all event updates. Clubhouse is a platform where you can join you favourite clubs and be notified about the events/meetings happening in that club. It is better for both the members and the clubs themselves, since the members would be able to participate in the club in a greater capacity and for clubs to increase participation.
