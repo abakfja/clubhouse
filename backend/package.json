@@ -8,17 +8,22 @@
     "lib": "lib"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "argon2": "^0.28.2",
+    "config": "^3.3.6",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "elasticsearch": "^16.7.2",
     "express": "^4.17.1",
+    "express-validator": "^6.12.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.14"
+    "mongoose": "^5.12.14",
+    "validator": "^13.6.0"
   },
   "devDependencies": {
     "eslint": "^7.28.0",
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   }
 }
